@@ -8,4 +8,4 @@ Se creo el algoritmo de huffman desde 0 para asi crear el arbol ya sabiendo las 
 
 Compilador: python
 
-Video: se subira a mas tardar el jueves 24 a las 18:00 hora colombia que no he dormido bien profe y me tengo que conseguir un microfono que se va a escuchar muy mal como el anterior video :(
+Video: https://drive.google.com/file/d/1Dvdmph89LIa2P6reiWKv2RiQjp1tdDIa/view?usp=sharing
