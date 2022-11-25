@@ -89,13 +89,7 @@ def crearNodos(nodo, valor, posicion):
             crearNodos(nodo.get_der(), item[1], posicion+"0")
             break
         indiceItem += 1
-    
-def añadirPosiciones(nodo):
-    pass
-    
-    
-    
-    
+         
 
 nodosHojas = []
 def hallarHojas(nodo): 
@@ -160,38 +154,40 @@ print(listaLetras)
 
 print(f"HOJAS: {datosHojas}")
 
+posPadre = None
 def hallarPosPadre(letra, nodo):
+    global posPadre
+    
     if nodo != None:
         if nodo.get_izq() != None and nodo.get_der() != None: 
             nodoDer = nodo.get_der().get_simbolo()
             nodoIzq = nodo.get_izq().get_simbolo()
               
             if nodoDer == letra or nodoIzq == letra:
-                return nodo.get_posicion()
+                posPadre = nodo.get_posicion() 
             else:
-                posPadre = hallarPosPadre(letra, nodo.get_izq())
-                
-                if posPadre == None:
-                    posPadre = hallarPosPadre(letra, nodo.get_der())
-                else:
-                    return posPadre
+                hallarPosPadre(letra, nodo.get_izq())
+                hallarPosPadre(letra, nodo.get_der())
          
         
         
-
+primera=True
 recorridoCompleto = False
 letrasUsadas = []
 
 for letra in txt:
-    
-    if letra in letrasUsadas:
-        posicionLetra(letra, raiz)   
-        document.add_paragraph(posEncontrada)
-    else:
-        posPadre = hallarPosPadre(letra, raiz)
-        letrasUsadas.append(letra)  
-        document.add_paragraph(posPadre)
-        document.add_paragraph(diccionario[letra])
+    if primera:
+        document.add_paragraph(f"{letra}: {diccionario[letra]}")
+        primera=False
+    else:   
+        if letra in letrasUsadas:
+            posicionLetra(letra, raiz)   
+            document.add_paragraph(f"{letra}: {posEncontrada}")
+        else:
+            hallarPosPadre(letra, raiz)
+            letrasUsadas.append(letra)  
+            document.add_paragraph(posPadre)
+            document.add_paragraph(f"{letra}: {diccionario[letra]}")
 
 document.save('recorrido.docx')
 
